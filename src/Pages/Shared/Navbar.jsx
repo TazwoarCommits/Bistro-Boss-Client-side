@@ -1,12 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
-    const links = <div>
-         <li><NavLink to="/">Home</NavLink></li>
-         <li><NavLink to="#">Contact Us</NavLink></li>
-         <li><NavLink to="#">DashBoard</NavLink></li>
-         <li><NavLink to="#">Our Menu</NavLink></li>
-         <li><NavLink to="#">Our Shop</NavLink></li>
+    const links = <div className="space-x-2 space-y-2">
+         <NavLink to="/">Home</NavLink>
+         <NavLink to="#">Contact Us</NavLink>
+         <NavLink to="#">DashBoard</NavLink>
+         <NavLink to="#">Our Menu</NavLink>
+         <NavLink to="#">Our Shop</NavLink>
     </div>
     return (
         <div className="navbar bg-base-100">
