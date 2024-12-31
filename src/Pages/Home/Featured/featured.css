@@ -1,5 +1,5 @@
 .featured-item {
- background: url("../../../assets/home/chef-service.jpg");
- background-color: rgba(0, 0, 0, 0.6);
- background-blend-mode: overlay;
+ background-image: url("../../../assets/home/chef-service.jpg");
+ background-color: rgba(0, 0, 0, 0.61) ;
+ background-blend-mode: overlay ;
 }
