@@ -36,7 +36,7 @@ const TestiMonial = () => {
                                     readOnly
                                 />
                                 <p className="text-5xl font-bold"><FaQuoteLeft /></p>
-                                <p>{rev.details}</p>
+                                <p className="md:max-w-[900px] mx-auto">{rev.details}</p>
                                 <h3 className="text-xl md:text-3xl text-amber-300">{rev.name}</h3>
                             </div>
                         </SwiperSlide>)

@@ -11,8 +11,8 @@ const CommonBanner = ({ img, title, subtitle }) => {
         >
             <div className="hero md:min-h-[700px]">
                 <div className="hero-overlay bg-opacity-60"></div>
-                <div className="bg-black/50 hero-content w-full md:w-[700PX] py-24 text-center">
-                    <div className="max-w-md">
+                <div className="bg-black/50 hero-content w-full md:w-[900PX] py-24 text-center">
+                    <div className="max-w-2xl">
                         <h1 className="mb-5 text-5xl font-bold uppercase text-white ">{title}</h1>
                         <p className="mb-5 uppercase text-white">
                             {subtitle}
