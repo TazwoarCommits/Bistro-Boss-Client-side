@@ -6,7 +6,7 @@ const Navbar = () => {
          {/* <NavLink to="#">Contact Us</NavLink>
          <NavLink to="#">DashBoard</NavLink> */}
          <NavLink to="/menu">Our Menu</NavLink>
-         <NavLink to="/order">Order</NavLink>
+         <NavLink to="/order/salad">Order</NavLink>
     </div>
     return (
         <div className="max-w-screen-2xl navbar fixed z-10 bg-base-100/80">

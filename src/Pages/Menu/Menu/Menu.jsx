@@ -7,6 +7,7 @@ import dessertBanner from "../../../assets/menu/dessert-bg.jpeg"
 import pizzaBanner from "../../../assets/menu/pizza-bg.jpg"
 import SoupsBanner from "../../../assets/menu/soup-bg.jpg"
 import saladsBanner from "../../../assets/menu/salad-bg.jpg"
+import drinksBanner from "../../../assets/menu/drinks.avif"
 import MenuCategory from "./MenuCategory/MenuCategory";
 
 
@@ -15,7 +16,7 @@ const Menu = () => {
     const [menu] = useMenu();
     const dessert = menu.filter(item => item.category === "dessert");
     const salad = menu.filter(item => item.category === "salad");
-    // const drinks = menu.filter(item => item.category === "drinks");
+    const drinks = menu.filter(item => item.category === "drinks");
     const pizza = menu.filter(item => item.category === "pizza");
     const soup = menu.filter(item => item.category === "soup");
     const offered = menu.filter(item => item.category === "offered");
@@ -36,7 +37,7 @@ const Menu = () => {
                 heading={"Today's Offer"}
             ></SectionTitle>
             <div className="mt-12 md:mt-24">
-                <MenuCategory items={offered}></MenuCategory>
+                <MenuCategory items={offered} category="offered"></MenuCategory>
             </div>
             <div className="mt-12 md:mt-24">
                 <CommonBanner
@@ -45,7 +46,7 @@ const Menu = () => {
                     subtitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
                 ></CommonBanner>
                 <div className="mt-12 md:mt-24">
-                    <MenuCategory items={dessert}></MenuCategory>
+                    <MenuCategory items={dessert} category="dessert"></MenuCategory>
                 </div>
             </div>
             <div className="mt-12 md:mt-24">
@@ -55,7 +56,7 @@ const Menu = () => {
                     subtitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
                 ></CommonBanner>
                 <div className="mt-12 md:mt-24">
-                    <MenuCategory items={pizza}></MenuCategory>
+                    <MenuCategory items={pizza} category="pizza"></MenuCategory>
                 </div>
             </div>
             <div className="mt-12 md:mt-24">
@@ -65,7 +66,7 @@ const Menu = () => {
                     subtitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
                 ></CommonBanner>
                 <div className="mt-12 md:mt-24">
-                    <MenuCategory items={soup}></MenuCategory>
+                    <MenuCategory items={soup} category="soup"></MenuCategory>
                 </div>
             </div>
             <div className="mt-12 md:mt-24">
@@ -75,7 +76,17 @@ const Menu = () => {
                     subtitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
                 ></CommonBanner>
                 <div className="mt-12 md:mt-24">
-                    <MenuCategory items={salad}></MenuCategory>
+                    <MenuCategory items={salad} category="salad"></MenuCategory>
+                </div>
+            </div>
+            <div className="mt-12 md:mt-24">
+                <CommonBanner
+                    img={drinksBanner}
+                    title={"Drinks"}
+                    subtitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
+                ></CommonBanner>
+                <div className="mt-12 md:mt-24">
+                    <MenuCategory items={drinks} category="drinks"></MenuCategory>
                 </div>
             </div>
         </div>
