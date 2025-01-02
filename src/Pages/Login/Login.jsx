@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../Providers/AuthProvider';
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {
+    const {loginUser} = useContext(AuthContext)
 
     useEffect(()=>{
         loadCaptchaEnginge(6);
@@ -16,7 +19,10 @@ const Login = () => {
         const captcha = form.get("captcha")
 
         if(validateCaptcha(captcha)){
-            console.log("proceed to next process");
+            loginUser(email , password)
+            .then(res => {
+                console.log(res.user);
+            })
         }
         else{console.log("captcha did not matched");}
     }
@@ -59,6 +65,7 @@ const Login = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <p className='ml-4'>New Here ? <Link to="/register">Create a new Account</Link></p>
                 </div>
             </div>
         </div>
