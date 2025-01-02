@@ -3,13 +3,14 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 
 
 const Register = () => {
 
     const { createUser } = useContext(AuthContext);
-    const navigate = useNavigate() ;
+    const navigate = useNavigate();
 
     const {
         register,
@@ -19,12 +20,29 @@ const Register = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        createUser(data.email , data.password)
-        .then(res => {
-            console.log(res.user)
-        })
-        reset();
-        navigate("/")
+        createUser(data.email, data.password)
+            .then(res => {
+                if (res.user) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Successfully",
+                        text: "Logged In",
+                    });
+
+                    reset();
+                    navigate("/");
+                }
+            })
+            .catch(err=>{
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${err.message}`,
+                  });
+
+                  reset() ;
+            })
+
     }
 
     return (

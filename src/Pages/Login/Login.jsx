@@ -3,6 +3,8 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 
 const Login = () => {
@@ -14,28 +16,38 @@ const Login = () => {
     }, [])
 
     const handleLogin = e => {
-        e.preventDefault();
-        const form = new FormData(e.target);
-        const email = form.get("email");
-        const password = form.get("password");
-        const captcha = form.get("captcha")
+        e.preventDefault() ;
+        const form = new FormData(e.target) ; 
+        const email = form.get("email") ;
+        const password = form.get("password") ;
+        const captcha = form.get("captcha") ;
 
         if (validateCaptcha(captcha)) {
             loginUser(email, password)
                 .then(res => {
                     if(res.user){
+                        Swal.fire({
+                            icon: "success",
+                            title: "Successfully",
+                            text: "Logged In",
+                          });
                         e.target.reset() ;
                         navigate("/") ;
                     }
                 })
                .catch(err => {
-                console.log(err.message);
-                e.target.reset() ;
-               })
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `${err.message}`,
+                  }) ;
+               }) ;
 
         }
-        else { console.log("captcha did not matched"); }
-    }
+        else {
+            toast.error("captcha did not match, try again") ;
+         } ;
+    } ;
 
     return (
         <>
