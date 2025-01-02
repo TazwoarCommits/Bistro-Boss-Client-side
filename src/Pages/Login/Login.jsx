@@ -1,12 +1,13 @@
 import { useContext, useEffect } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 
 const Login = () => {
-    const { loginUser } = useContext(AuthContext)
+    const { loginUser } = useContext(AuthContext) ;
+    const navigate = useNavigate() ;
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -22,8 +23,16 @@ const Login = () => {
         if (validateCaptcha(captcha)) {
             loginUser(email, password)
                 .then(res => {
-                    console.log(res.user);
+                    if(res.user){
+                        e.target.reset() ;
+                        navigate("/") ;
+                    }
                 })
+               .catch(err => {
+                console.log(err.message);
+                e.target.reset() ;
+               })
+
         }
         else { console.log("captcha did not matched"); }
     }
