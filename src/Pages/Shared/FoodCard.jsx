@@ -1,9 +1,37 @@
 import PropTypes from "prop-types";
+import useAuth from "../../Hooks/useAuth";
+import { Navigate, useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
+
+
 
 const FoodCard = ({item}) => {
     const {name , image , recipe , price} = item ;
+    const navigate = useNavigate() ;
+    const {user} = useAuth() ; 
     const handleAddToCart = (food)=> {
-        console.log(food);
+        if(user && user.email){
+            console.log(food , user.email);
+        }
+        else{
+            Swal.fire({
+                title: "User Not Logged In",
+                text: "You Have To Login To Place Your Orders",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Login"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire({
+                    title: "Redirecting to Login Page",
+                    icon: "success"
+                  });
+                  navigate("/login")
+                }
+              });
+        }
     }
 
     return (
