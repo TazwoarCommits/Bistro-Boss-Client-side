@@ -7,8 +7,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
-    const [cart] = useCart() ;
+    const { user, logout,} = useContext(AuthContext);
+    const [cart] = useCart();
 
     // const axiosSecure = useAxiosSecure() ; 
     // axiosSecure("/carts")
@@ -25,10 +25,11 @@ const Navbar = () => {
         <NavLink to="/order/salad">Order</NavLink>
         <NavLink to="/cart">
             <button className="flex items-center gap-1">
-            <FaShoppingCart /><span className="">{cart.length}</span>
+                <FaShoppingCart /><span className="">{cart.length}</span>
             </button>
         </NavLink>
     </div>
+
 
     return (
         <div className="max-w-screen-2xl navbar fixed z-10 bg-base-100/80">
