@@ -1,14 +1,15 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { IoLogOut } from "react-icons/io5";
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
 
     const links = <div className="space-x-2 space-y-2">
         <NavLink to="/">Home</NavLink>
-        <NavLink to="#">Contact Us</NavLink>
-        <NavLink to="#">DashBoard</NavLink>
+        <NavLink to="/error">Contact Us</NavLink>
+        <NavLink to="/error">DashBoard</NavLink>
         <NavLink to="/menu">Our Menu</NavLink>
         <NavLink to="/order/salad">Order</NavLink>
     </div>
@@ -37,7 +38,7 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <Link><p className="btn btn-ghost text-xl">Bistro Boss</p></Link>
+                <Link><p className="btn btn-ghost text-xl text-amber-300">Bistro Boss</p></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -48,7 +49,7 @@ const Navbar = () => {
                 {
                     user ?
                         <p onClick={logout}
-                            className="btn">Logout</p>
+                            className="btn text-amber-300"><span>{user.displayName}</span><span className="text-lg"><IoLogOut /></span></p>
 
                         :
 

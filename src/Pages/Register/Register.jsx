@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext);
+    const { createUser , updataUsersProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const {
@@ -29,6 +30,13 @@ const Register = () => {
                         text: "Logged In",
                     });
 
+                    updataUsersProfile(data.name , data.photo)
+                    .then( () => {
+                        toast.error(`Profile Updated Successfully`)
+                    })
+                    .catch(err => {
+                        toast.error(`${err.code , err.message}`)
+                    })
                     reset();
                     navigate("/");
                 }
@@ -94,6 +102,12 @@ const Register = () => {
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Photo URL</span>
+                                </label>
+                                <input type="text" placeholder="photo URL" {...register("photo", { required: true })} className="input input-bordered" required />
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Register</button>
