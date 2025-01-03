@@ -2,16 +2,38 @@ import PropTypes from "prop-types";
 import useAuth from "../../Hooks/useAuth";
 import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 
 const FoodCard = ({item}) => {
-    const {name , image , recipe , price} = item ;
+    const {name , image , recipe , price , _id} = item ;
     const navigate = useNavigate() ;
     const {user} = useAuth() ; 
     const handleAddToCart = (food)=> {
         if(user && user.email){
-            console.log(food , user.email);
+            // console.log(food , user.email);
+            const cartItem = {
+                menuId : _id ,
+                userEmail : user.email ,
+                image : image ,
+                name : name ,
+                price : price
+            }
+
+            axios.post("http://localhost:5000/carts" , cartItem)
+            .then( res => {
+                console.log(res.data)
+                if(res.data.insertedId){
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Added to Cart",
+                        showConfirmButton: false,
+                        timer: 1000 ,
+                      });
+                }
+            })
         }
         else{
             Swal.fire({

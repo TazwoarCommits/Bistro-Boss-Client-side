@@ -27,7 +27,7 @@ const PrivateRoute = ({ children }) => {
 };
 
 PrivateRoute.propTypes = {
-    children : PropTypes.func
+    children : PropTypes.object
 }
 
 export default PrivateRoute;
