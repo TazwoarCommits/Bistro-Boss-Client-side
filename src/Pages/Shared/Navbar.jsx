@@ -3,9 +3,18 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { IoLogOut } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
+// import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useCart from "../../Hooks/useCart";
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
+    const [cart] = useCart() ;
+
+    // const axiosSecure = useAxiosSecure() ; 
+    // axiosSecure("/carts")
+    // .then(res=>{
+    //     console.log(res.data)
+    // })
 
 
     const links = <div className="flex items-center gap-2">
@@ -16,7 +25,7 @@ const Navbar = () => {
         <NavLink to="/order/salad">Order</NavLink>
         <NavLink to="/cart">
             <button className="flex items-center gap-1">
-            <FaShoppingCart /><span className="">0</span>
+            <FaShoppingCart /><span className="">{cart.length}</span>
             </button>
         </NavLink>
     </div>

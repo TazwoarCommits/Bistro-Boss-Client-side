@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import useAuth from "../../Hooks/useAuth";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
-import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
 
 
 
@@ -10,7 +11,10 @@ const FoodCard = ({item}) => {
     const {name , image , recipe , price , _id} = item ;
     const navigate = useNavigate() ;
     const {user} = useAuth() ; 
-    const handleAddToCart = (food)=> {
+    const axiosSecure = useAxiosSecure() ;
+
+
+    const handleAddToCart = ( ) => {
         if(user && user.email){
             // console.log(food , user.email);
             const cartItem = {
@@ -21,7 +25,7 @@ const FoodCard = ({item}) => {
                 price : price
             }
 
-            axios.post("http://localhost:5000/carts" , cartItem)
+            axiosSecure.post("/carts" , cartItem)
             .then( res => {
                 console.log(res.data)
                 if(res.data.insertedId){
