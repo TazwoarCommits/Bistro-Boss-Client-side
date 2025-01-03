@@ -36,7 +36,7 @@ import PrivateRoute from "./PrivateRoute";
           element : <Register></Register>
         },
         {
-          path : "/secret",
+          path : "/cart",
           element : <PrivateRoute><p>ORRRRRRRRRRRRRRRREEEEEEEEEEEEEEEEEEE</p></PrivateRoute>
         }
       ]

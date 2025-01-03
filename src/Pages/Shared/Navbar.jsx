@@ -2,18 +2,25 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { IoLogOut } from "react-icons/io5";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
 
-    const links = <div className="space-x-2 space-y-2">
+
+    const links = <div className="flex items-center gap-2">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/error">Contact Us</NavLink>
         <NavLink to="/error">DashBoard</NavLink>
         <NavLink to="/menu">Our Menu</NavLink>
         <NavLink to="/order/salad">Order</NavLink>
+        <NavLink to="/cart">
+            <button className="flex items-center gap-1">
+            <FaShoppingCart /><span className="">0</span>
+            </button>
+        </NavLink>
     </div>
-    
+
     return (
         <div className="max-w-screen-2xl navbar fixed z-10 bg-base-100/80">
             <div className="navbar-start">
