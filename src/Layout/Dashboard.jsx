@@ -1,5 +1,5 @@
 
-import { FaCalendar, FaHome, FaShoppingCart } from 'react-icons/fa';
+import { FaCalendar, FaHome, FaList, FaShoppingCart, FaUsers, FaUtensils } from 'react-icons/fa';
 import { MdEmail, MdOutlineReviews, MdPayments, MdRestaurantMenu } from 'react-icons/md';
 import { RiShoppingBag4Fill } from 'react-icons/ri';
 import { TbCalendarPin } from 'react-icons/tb';
@@ -18,33 +18,28 @@ const Dashboard = () => {
                         isAdmin ?
                             <>
                                 <li>
-                                    <NavLink to={"/dashboard/userHome"}>
+                                    <NavLink to={"/dashboard/adminHome"}>
                                         <span><FaHome /></span>Users Home
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/dashboard/reservation"}>
-                                        <span><FaCalendar /></span> Reservation
+                                    <NavLink to={"/dashboard/addItems"}>
+                                        <span><FaUtensils /></span> Add Items
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/dashboard/payment-history"}>
-                                        <span><MdPayments /></span> Payment History
+                                    <NavLink to={"/dashboard/manageItems"}>
+                                        <span><FaList /></span> Manage Items
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/dashboard/cart"}>
-                                        <span><FaShoppingCart /></span> My Cart
+                                    <NavLink to={"/dashboard/manageBookings"}>
+                                        <span><TbCalendarPin /></span> Manage Bookings
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={"/dashboard/addreview"}>
-                                        <span><MdOutlineReviews /></span> Add Review
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to={"/dashboard/mybooking"}>
-                                        <span> <TbCalendarPin /></span> My Bookings
+                                    <NavLink to={"/dashboard/allUsers"}>
+                                        <span><FaUsers /></span> All Users
                                     </NavLink>
                                 </li>
                             </> :
