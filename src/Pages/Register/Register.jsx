@@ -5,12 +5,14 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import GoogleLogin from "../../components/Social Login/GoogleLogin";
 
 
 
 const Register = () => {
-
-    const { createUser , updataUsersProfile } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic() ;
+    const { createUser , updataUsersProfile } = useContext(AuthContext) ;
     const navigate = useNavigate();
 
     const {
@@ -24,21 +26,33 @@ const Register = () => {
         createUser(data.email, data.password)
             .then(res => {
                 if (res.user) {
-                    Swal.fire({
+                    updataUsersProfile(data.name , data.photo)
+                    .then( () => {
+                       const userInfo = {
+                        name : data.name , email : data.email , photo : data.photo
+                       } ;
+
+                       axiosPublic.post("/users" , userInfo)
+                       .then(res => {
+                        if(res.data){
+                           console.log(data);
+                        }
+                        
+                       }) ;
+
+                       Swal.fire({
                         icon: "success",
                         title: "Successfully",
                         text: "Logged In",
                     });
 
-                    updataUsersProfile(data.name , data.photo)
-                    .then( () => {
-                        toast.error(`Profile Updated Successfully`)
+                       navigate("/");
                     })
                     .catch(err => {
                         toast.error(`${err.code , err.message}`)
                     })
                     reset();
-                    navigate("/");
+                   
                 }
             })
             .catch(err=>{
@@ -113,7 +127,11 @@ const Register = () => {
                                 <button className="btn btn-primary">Register</button>
                             </div>
                         </form>
-                        <p className="ml-4">Have an Account ? <Link to="/login">Login Now</Link></p>
+                        <div className="divider"></div>
+                        <div className="mx-auto mb-6">
+                         <GoogleLogin></GoogleLogin>
+                        </div>
+                        <p className="ml-4 mb-6">Have an Account ? <Link to="/login">Login Now</Link></p>
                     </div>
                 </div>
             </div>

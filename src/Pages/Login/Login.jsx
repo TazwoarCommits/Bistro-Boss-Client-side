@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
+import GoogleLogin from '../../components/Social Login/GoogleLogin';
 
 
 const Login = () => {
@@ -91,7 +92,11 @@ const Login = () => {
                                 <button className="btn btn-primary">Login</button>
                             </div>
                         </form>
-                        <p className='ml-4'>New Here ? <Link to="/register">Create a new Account</Link></p>
+                        <div className="divider"></div>
+                        <div className='mx-auto mb-6'>
+                            <GoogleLogin></GoogleLogin>
+                        </div>
+                        <p className='ml-4 mb-6'>New Here ? <Link to="/register">Create a new Account</Link></p>
                     </div>
                 </div>
             </div>
