@@ -7,10 +7,14 @@ import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Order/Order/Order";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-// import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart/Cart";
 import AllUsers from "../Pages/Dashboard/All Users/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AddItem from "../Pages/Dashboard/AddItem/AddItem";
+import ManageBooking from "../Pages/Dashboard/ManageBooking/ManageBooking";
+import ManageItem from "../Pages/Dashboard/ManageItem/ManageItem";
 
 export const router = createBrowserRouter([
   {
@@ -46,13 +50,25 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/cart",
-        element : <Cart></Cart>
+        element : <PrivateRoute><Cart></Cart></PrivateRoute>
       },
 
       // admin routes 
       {
         path : "/dashboard/allUsers" ,
-        element : <AllUsers></AllUsers>
+        element : <AdminRoute><AllUsers></AllUsers></AdminRoute>
+      },
+      {
+         path : "/dashboard/addItems" , 
+         element : <AdminRoute><AddItem></AddItem></AdminRoute>
+      },
+      {
+         path : "/dashboard/manageItems" , 
+         element : <AdminRoute><ManageItem></ManageItem></AdminRoute>
+      },
+      {
+         path : "/dashboard/manageBookings" , 
+         element : <AdminRoute><ManageBooking></ManageBooking></AdminRoute>
       },
     ],
   },
