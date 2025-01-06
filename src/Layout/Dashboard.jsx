@@ -4,10 +4,11 @@ import { MdEmail, MdOutlineReviews, MdPayments, MdRestaurantMenu } from 'react-i
 import { RiShoppingBag4Fill } from 'react-icons/ri';
 import { TbCalendarPin } from 'react-icons/tb';
 import { NavLink, Outlet } from 'react-router-dom';
+import useAdmin from '../Hooks/useAdmin';
 const Dashboard = () => {
 
     // TODO : get isAdmin from database
-    const isAdmin = true;
+    const[ isAdmin ]= useAdmin() ;
 
     return (
         <div className='flex'>
