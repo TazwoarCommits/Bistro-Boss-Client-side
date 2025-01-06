@@ -15,16 +15,34 @@ const AddItem = () => {
                 heading={"Add an Item"}
             ></SectionTitle>
             <div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register("name")} />
-                    <select  {...register("category")} className="select select-bordered w-full max-w-xs">
-                        <option disabled selected>Select a Category</option>
-                        <option>Salad</option>
-                        <option>Pizza</option>
-                        <option>Soup</option>
-                        <option>Dessert</option>
-                        <option>Drinks</option>
-                    </select>
+                <form className="md:w-10/12 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+                    <label className="form-control w-full my-3">
+                        <div className="label">
+                            <span className="label-text">Recipe Name*</span>
+                        </div>
+                        <input type="text" placeholder="Recipe Name" {...register("name")} className="input input-bordered w-full " />
+                    </label>
+                    <div className="flex gap-8">
+                        <label className="form-control w-1/2 my-3">
+                            <div className="label">
+                                <span className="label-text">Recipe Name*</span>
+                            </div>
+                            <select  {...register("category")} className="select select-bordered w-full ">
+                                <option disabled selected>Select a Category</option>
+                                <option>Salad</option>
+                                <option>Pizza</option>
+                                <option>Soup</option>
+                                <option>Dessert</option>
+                                <option>Drinks</option>
+                            </select>
+                        </label>
+                        <label className="form-control w-1/2 my-3">
+                            <div className="label">
+                                <span className="label-text">Price</span>
+                            </div>
+                            <input type="text" placeholder="Price" {...register("Price")} className="input input-bordered w-full " />
+                        </label>
+                    </div>
                     <input type="submit" />
                 </form>
             </div>
