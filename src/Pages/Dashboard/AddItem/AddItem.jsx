@@ -1,11 +1,13 @@
+import { FaUtensils } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form"
 
 
 const AddItem = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit , reset } = useForm();
     const onSubmit = (data) => {
-        console.log(data)
+        console.log("full-data", data , "image", data.image)
+        reset()
     };
 
     return (
@@ -20,14 +22,14 @@ const AddItem = () => {
                         <div className="label">
                             <span className="label-text">Recipe Name*</span>
                         </div>
-                        <input type="text" placeholder="Recipe Name" {...register("name")} className="input input-bordered w-full " />
+                        <input type="text" placeholder="Recipe Name" {...register("name" ,{required : true})} className="input input-bordered w-full " />
                     </label>
                     <div className="flex gap-8">
                         <label className="form-control w-1/2 my-3">
                             <div className="label">
                                 <span className="label-text">Recipe Name*</span>
                             </div>
-                            <select  {...register("category")} className="select select-bordered w-full ">
+                            <select  {...register("category",{required : true})} className="select select-bordered w-full ">
                                 <option disabled selected>Select a Category</option>
                                 <option>Salad</option>
                                 <option>Pizza</option>
@@ -40,10 +42,18 @@ const AddItem = () => {
                             <div className="label">
                                 <span className="label-text">Price</span>
                             </div>
-                            <input type="text" placeholder="Price" {...register("Price")} className="input input-bordered w-full " />
+                            <input type="text" placeholder="Price" {...register("price",{required : true})} className="input input-bordered w-full " />
                         </label>
                     </div>
-                    <input type="submit" />
+                    <textarea
+                        {...register("recipe",{required : true})}
+                        placeholder="Recipe Details"
+                        className="textarea textarea-bordered w-full h-48 resize-none ">
+                    </textarea>
+                    <div className="my-3">
+                        <input type="file" {...register("image",{required : true})} className="file-input w-full max-w-xs" />
+                    </div>
+                    <button className="btn">Add Item <FaUtensils></FaUtensils></button>
                 </form>
             </div>
         </div>
