@@ -13,13 +13,13 @@ const Order = () => {
     const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
     const initailIndex = categories.indexOf(category)
     const [tabIndex, setTabIndex] = useState(initailIndex);
-    const [menu] = useMenu();
+    const [menues] = useMenu();
 
-    const dessert = menu.filter(item => item.category === "dessert");
-    const salad = menu.filter(item => item.category === "salad");
-    const drinks = menu.filter(item => item.category === "drinks");
-    const pizza = menu.filter(item => item.category === "pizza");
-    const soup = menu.filter(item => item.category === "soup");
+    const dessert = menues.filter(item => item.category === "dessert");
+    const salad = menues.filter(item => item.category === "salad");
+    const drinks = menues.filter(item => item.category === "drinks");
+    const pizza = menues.filter(item => item.category === "pizza");
+    const soup = menues.filter(item => item.category === "soup");
 
     return (
         <div>

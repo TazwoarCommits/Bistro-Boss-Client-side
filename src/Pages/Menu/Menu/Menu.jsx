@@ -13,13 +13,13 @@ import MenuCategory from "./MenuCategory/MenuCategory";
 
 
 const Menu = () => {
-    const [menu] = useMenu();
-    const dessert = menu.filter(item => item.category === "dessert");
-    const salad = menu.filter(item => item.category === "salad");
-    const drinks = menu.filter(item => item.category === "drinks");
-    const pizza = menu.filter(item => item.category === "pizza");
-    const soup = menu.filter(item => item.category === "soup");
-    const offered = menu.filter(item => item.category === "offered");
+    const [menues] = useMenu();
+    const dessert = menues.filter(item => item.category === "dessert");
+    const salad = menues.filter(item => item.category === "salad");
+    const drinks = menues.filter(item => item.category === "drinks");
+    const pizza = menues.filter(item => item.category === "pizza");
+    const soup = menues.filter(item => item.category === "soup");
+    const offered = menues.filter(item => item.category === "offered");
 
     return (
         <div>
