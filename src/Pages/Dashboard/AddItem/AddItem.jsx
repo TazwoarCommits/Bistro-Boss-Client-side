@@ -3,13 +3,13 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { useForm } from "react-hook-form"
 import useAxiosPublic from "../../../Hooks/useAxiosPublic"
 import useAxiosSecure from "../../../Hooks/useAxiosSecure"
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_API = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddItem = () => {
-    const { register, handleSubmit, } = useForm();
+    const { register, handleSubmit, reset} = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure() ;
     const onSubmit = async (data) => {
@@ -32,7 +32,11 @@ const AddItem = () => {
          const menuRes = await axiosSecure.post("/menu" , menuItem) ;
          console.log(menuRes.data) ;
          if(menuRes.data.insertedId){
-            toast.success("Done");
+            reset() ;
+            Swal.fire({
+                title: "New Item Added On the Menu",
+                icon: "success",
+              });
          }
 
         };
