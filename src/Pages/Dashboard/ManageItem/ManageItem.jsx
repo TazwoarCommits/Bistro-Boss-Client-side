@@ -19,13 +19,16 @@ const ManageItem = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+          }).then( async (result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+                const res = await axiosSecure.delete(`/menu/${menu._id}`)
+                if(res.data.deletedCount > 0){
+                    Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                          });
+                }
             }
           });
     }
