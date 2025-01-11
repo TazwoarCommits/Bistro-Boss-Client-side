@@ -58,6 +58,9 @@ export const router = createBrowserRouter([
         path : "/dashboard/payment" ,
         element : <PrivateRoute><Payment></Payment></PrivateRoute>
       } , 
+      {
+        path : "/dashboard/payment-history"
+      },
 
       // admin routes 
       {

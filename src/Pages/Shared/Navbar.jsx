@@ -5,6 +5,7 @@ import { IoLogOut } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 // import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCart from "../../Hooks/useCart";
+import PaymentHistory from './../Dashboard/PaymentHistory/PaymentHistory';
 
 const Navbar = () => {
     const { user, logout,} = useContext(AuthContext);
@@ -21,6 +22,7 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/error">Contact Us</NavLink>
         <NavLink to="/dashboard">DashBoard</NavLink>
+        <NavLink to="/dashboard/payment-history">Payment-History</NavLink>
         <NavLink to="/menu">Our Menu</NavLink>
         <NavLink to="/order/salad">Order</NavLink>
         <NavLink to="/dashboard/cart">
