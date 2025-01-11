@@ -2,6 +2,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from './../../../Hooks/useAxiosSecure';
 import useCart from './../../../Hooks/useCart';
+import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 
@@ -11,13 +13,16 @@ const CheckoutForm = () => {
     const [error , setError] = useState("") ;
     const [clientSecret , setClientSecret] = useState() ;
     const axiosSecure = useAxiosSecure() ;
+    const {user} = useAuth() ;
     const [cart] = useCart() ;
     const totalPrice = cart.reduce((accumulator , item) => accumulator + item.price , 0 )
 
+    console.log(user);
     useEffect(()=> {
       axiosSecure.post("/create-payment-intent" , {price : totalPrice})
        .then(res => {
         setClientSecret(res.data.clientSecret) 
+        console.log(res.data);
        })
     } , [axiosSecure , totalPrice]) ;
 
@@ -47,6 +52,36 @@ const CheckoutForm = () => {
         else{
             console.log("Payment Method" , paymentMethod);
             setError("")
+        }
+
+
+        // confirm payment
+
+        const {paymentIntent , error : confirmError} = await stripe.confirmCardPayment( clientSecret , {
+            payment_method : {
+                card : card ,
+                billing_details : {
+                    email : user?.email || "anonymous",
+                    name : user?.displayName || "anonymous",
+                } 
+            }
+        } )
+
+        if(confirmError){
+            console.log(confirmError);
+        }
+
+        else{console.log(paymentIntent)
+            if(paymentIntent.status === "succeeded"){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Payment Complete",
+                    text: `Transaction ID : ${paymentIntent.id}`,
+                    showConfirmButton: false,
+                    timer: 3000
+                  });
+            }
         }
 
     }
