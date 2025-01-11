@@ -17,7 +17,7 @@ const CheckoutForm = () => {
     const [cart] = useCart() ;
     const totalPrice = cart.reduce((accumulator , item) => accumulator + item.price , 0 )
 
-    console.log(user);
+    // console.log(user);
     useEffect(()=> {
       axiosSecure.post("/create-payment-intent" , {price : totalPrice})
        .then(res => {
