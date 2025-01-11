@@ -4,6 +4,7 @@ import useAxiosSecure from './../../../Hooks/useAxiosSecure';
 import useCart from './../../../Hooks/useCart';
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -16,7 +17,8 @@ const CheckoutForm = () => {
     const axiosSecure = useAxiosSecure() ;
     const {user} = useAuth() ;
     const [cart] = useCart() ;
-    const totalPrice = cart.reduce((accumulator , item) => accumulator + item.price , 0 )
+    const totalPrice = cart.reduce((accumulator , item) => accumulator + item.price , 0 ) ; 
+    const navigate = useNavigate() ;
 
     useEffect(()=> {
       axiosSecure.post("/create-payment-intent" , {price : totalPrice})
@@ -74,14 +76,14 @@ const CheckoutForm = () => {
         else{console.log(paymentIntent)
             setTransactionID(paymentIntent.id) ;
             if(paymentIntent.status === "succeeded"){
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Payment Complete",
-                    text: `Transaction ID : ${paymentIntent.id}`,
-                    showConfirmButton: false,
-                    timer: 3000
-                  });
+                // Swal.fire({
+                //     position: "center",
+                //     icon: "success",
+                //     title: "Payment Complete",
+                //     text: `Transaction ID : ${paymentIntent.id}`,
+                //     showConfirmButton: false,
+                //     timer: 3000
+                //   });
             
                 //   save the payment in database 
 
@@ -95,10 +97,18 @@ const CheckoutForm = () => {
                     status : "Pending"
                 }
 
-                console.log(payment);
-
                const res = await axiosSecure.post("/payments" , payment)
                 console.log(res.data);
+                if(res.data?.result?.insertedId){
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your Payment Has Been Done",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      navigate("/dashboard/payment-history")
+                }
             }
         }
 
