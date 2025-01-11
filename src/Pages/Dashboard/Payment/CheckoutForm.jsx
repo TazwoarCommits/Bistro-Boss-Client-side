@@ -11,13 +11,13 @@ const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const [error , setError] = useState("") ;
-    const [clientSecret , setClientSecret] = useState() ;
+    const [clientSecret , setClientSecret] = useState("") ;
+    const [transactionID , setTransactionID] = useState("") ;
     const axiosSecure = useAxiosSecure() ;
     const {user} = useAuth() ;
     const [cart] = useCart() ;
     const totalPrice = cart.reduce((accumulator , item) => accumulator + item.price , 0 )
 
-    // console.log(user);
     useEffect(()=> {
       axiosSecure.post("/create-payment-intent" , {price : totalPrice})
        .then(res => {
@@ -72,6 +72,7 @@ const CheckoutForm = () => {
         }
 
         else{console.log(paymentIntent)
+            setTransactionID(paymentIntent.id) ;
             if(paymentIntent.status === "succeeded"){
                 Swal.fire({
                     position: "center",
@@ -81,6 +82,23 @@ const CheckoutForm = () => {
                     showConfirmButton: false,
                     timer: 3000
                   });
+            
+                //   save the payment in database 
+
+                const payment = {
+                    email : user?.email,
+                    price : totalPrice ,
+                    transactionID : transactionID || paymentIntent?.id ,
+                    date : new Date()  ,//utc date convert , use Moment JS 
+                    cartIds : cart.map(item => item._id),
+                    menuItemIDs  : cart.map(item => item.menuId) ,
+                    status : "Pending"
+                }
+
+                console.log(payment);
+
+               const res = await axiosSecure.post("/payments" , payment)
+                console.log(res.data);
             }
         }
 
@@ -108,6 +126,7 @@ const CheckoutForm = () => {
                 Pay
             </button>
             <p className="ml-6 text-red-800">{error}</p>
+            <p className="ml-6 text-red-800">Transaction ID : {transactionID}</p>
         </form>
     );
 };
