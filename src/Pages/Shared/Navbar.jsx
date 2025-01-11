@@ -5,7 +5,6 @@ import { IoLogOut } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 // import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCart from "../../Hooks/useCart";
-import PaymentHistory from './../Dashboard/PaymentHistory/PaymentHistory';
 
 const Navbar = () => {
     const { user, logout,} = useContext(AuthContext);
