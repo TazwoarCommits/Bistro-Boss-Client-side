@@ -5,10 +5,12 @@ import { IoLogOut } from "react-icons/io5";
 import { FaShoppingCart } from "react-icons/fa";
 // import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
-    const { user, logout,} = useContext(AuthContext);
+    const { user, logout, } = useContext(AuthContext);
     const [cart] = useCart();
+    const [isAdmin] = useAdmin();
 
     // const axiosSecure = useAxiosSecure() ; 
     // axiosSecure("/carts")
@@ -16,20 +18,24 @@ const Navbar = () => {
     //     console.log(res.data)
     // })
 
-
-    const links = <div className="flex items-center gap-2">
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/error">Contact Us</NavLink>
-        <NavLink to="/dashboard">DashBoard</NavLink>
-        <NavLink to="/dashboard/payment-history">Payment-History</NavLink>
-        <NavLink to="/menu">Our Menu</NavLink>
-        <NavLink to="/order/salad">Order</NavLink>
-        <NavLink to="/dashboard/cart">
+    const links = <>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/error">Contact Us</NavLink></li>
+        {
+            user && isAdmin && <li><NavLink to="/dashboard/adminHome">DashBoard</NavLink></li>
+        }
+        {
+            user && !isAdmin && <li><NavLink to="/dashboard/userHome">DashBoard</NavLink></li>
+        }
+        <li><NavLink to="/dashboard/payment-history">Payment-History</NavLink></li>
+        <li><NavLink to="/menu">Our Menu</NavLink></li>
+        <li><NavLink to="/order/salad">Order</NavLink></li>
+        <li><NavLink to="/dashboard/cart">
             <button className="flex items-center gap-1">
                 <FaShoppingCart /><span className="">{cart.length}</span>
             </button>
-        </NavLink>
-    </div>
+        </NavLink></li>
+    </>
 
 
     return (
