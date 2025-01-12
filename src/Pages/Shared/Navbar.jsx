@@ -22,19 +22,22 @@ const Navbar = () => {
         <li><NavLink to="/">Home</NavLink></li>
         <li><NavLink to="/error">Contact Us</NavLink></li>
         {
-            user && isAdmin && <li><NavLink to="/dashboard/adminHome">DashBoard</NavLink></li>
+            user && isAdmin &&
+            <li><NavLink to="/dashboard/adminHome">DashBoard</NavLink></li>
         }
         {
-            user && !isAdmin && <li><NavLink to="/dashboard/userHome">DashBoard</NavLink></li>
+            user && !isAdmin &&
+            <li><NavLink to="/dashboard/userHome">DashBoard</NavLink></li>
         }
-        <li><NavLink to="/dashboard/payment-history">Payment-History</NavLink></li>
         <li><NavLink to="/menu">Our Menu</NavLink></li>
         <li><NavLink to="/order/salad">Order</NavLink></li>
+        <li><NavLink to="/dashboard/payment-history">Payment-History</NavLink></li>
         <li><NavLink to="/dashboard/cart">
             <button className="flex items-center gap-1">
                 <FaShoppingCart /><span className="">{cart.length}</span>
             </button>
         </NavLink></li>
+
     </>
 
 
